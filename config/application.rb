@@ -9,8 +9,8 @@ Bundler.require(*Rails.groups)
 module BurritoFit
   class Application < Rails::Application
     config.hostname = ENV['HOSTNAME']
-    routes.default_url_options                   = {host: config.hostname}
-    config.action_mailer.default_url_options     = {host: config.hostname}
+    routes.default_url_options               = {host: config.hostname}
+    config.action_mailer.default_url_options = {host: config.hostname}
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -33,6 +33,7 @@ gem 'spring',        group: :development
 group :development do
   gem 'envyable'
   gem 'foreman'
+  gem 'pry-rails'
 end
 
 # Use rspec for testing
