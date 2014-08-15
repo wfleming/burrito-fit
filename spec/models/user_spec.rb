@@ -28,7 +28,8 @@ RSpec.describe User, :type => :model do
         )
       )
     end
-    it 'should construct a new Client, but only once' do
+
+    it 'should construct a new Client with correct params' do
       expect(Fitgem::Client).to receive(:new).with(
         consumer_key: Rails.application.secrets.fitbit_key,
         consumer_secret: Rails.application.secrets.fitbit_secret,
@@ -36,8 +37,12 @@ RSpec.describe User, :type => :model do
         secret: 'secret'
       ).once.and_call_original
 
+      @user.fitbit
+    end
+
+    it 'should use cached client for second call' do
       client = @user.fitbit
-      expect(@user.fitbit).to eq(client)
+      expect(@user.fitbit).to be(client)
     end
   end
 end

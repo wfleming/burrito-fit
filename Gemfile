@@ -33,7 +33,6 @@ gem 'sidekiq'
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'envyable'
   gem 'foreman'
   gem 'pry-rails'
 end
@@ -41,6 +40,7 @@ end
 # Use rspec for testing
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'envyable'
 end
 
 group :test do
