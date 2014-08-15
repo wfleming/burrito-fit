@@ -39,6 +39,7 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+    envyable (0.0.2)
     erubis (2.7.0)
     execjs (2.2.1)
     foreman (0.74.0)
@@ -178,6 +179,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
+  envyable
   foreman
   jbuilder (~> 2.0)
   jquery-rails

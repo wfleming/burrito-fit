@@ -13,6 +13,7 @@
 
 # Ignore all config files that should not be in source
 config/database.yml
+config/env.yml
 
 # Ignore generated assets/local uploads
 public/javascripts/bundles/
