@@ -32,6 +32,11 @@ group :development do
   gem 'foreman'
 end
 
+# Use rspec for testing
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
 # Use unicorn as the app server
 group :development, :deploy do
   gem 'unicorn'
