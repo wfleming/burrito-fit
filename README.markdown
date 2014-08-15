@@ -1,28 +1,30 @@
-== README
+README
+======
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Getting Started
+---------------
 
-Things you may want to cover:
+Run `./bin/bootstrap`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Check local configuration in `config/env.yml`: some keys may need to be
+customized locally (such as API keys for a FitBit app: see next section)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Local Tunnel for local testing
+------------------------------
+
+Proper testing of FitBit subscribers requires your app be open to the public
+Internet: suggested way of doing this is to use http://localtunnel.me:
+
+    npm install -g localtunnel
+    lt --port 5000 --subdomain YOURNAME-burrito
+    foreman start
+
+At https://dev.fitbit.com, you'll want to create an app with settings like:
+
+* Application Name: BurritoFitYOURNAMEDev
+* Application Website: https://YOURNAME-burrito.localtunnel.me
+* Organization Website: https://YOURNAME-burrito.localtunnel.me
+* App Type: Browser
+* Callback URL: https://YOURNAME-burritos.localtunnel.me/oauth/callback
+* Access Type: Read-only
