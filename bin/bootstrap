@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Script to bootstrap new instances of the app
+
+# Copy example/template files
+copy_example_file() {
+  dest_path=$1
+  example_path="$dest_path.example"
+  if [ ! -e $dest_path ]
+  then
+    echo "copying $example_path to $dest_path"
+    cp $example_path $dest_path
+  else
+    echo "not copying $example_path: $dest_path already exists"
+  fi
+}
+copy_example_file "config/database.yml"
+copy_example_file "config/env.yml"
+
+echo "Running bundle"
+bundle
+
+echo "Creating databases"
+rake db:create:all
+
+echo "running migrations"
+rake db:migrate
+
+# Final message
+cat <<MESSAGE
+Finished!
+
+For testing, you probably want to setup a localtunnel & a FitBit app. See
+the README for details.
+MESSAGE
