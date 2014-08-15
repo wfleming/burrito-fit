@@ -1,0 +1,13 @@
+common: &common
+  adapter:  postgresql
+  pool:     5
+  timeout:  5000
+  min_messages: warning
+
+development: &development
+  <<: *common
+  database: burrito_fit_development
+
+test: &test
+  <<: *common
+  database: burrito_fit_test
