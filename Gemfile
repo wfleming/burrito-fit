@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Auth
 gem 'omniauth-fitbit'
 
+gem 'fitgem'
 gem 'sidekiq'
 
 group :development do
