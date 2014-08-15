@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :oauth_token
+  has_many :calorie_logs
 
   def to_s
     oauth_token.extra_info['name']

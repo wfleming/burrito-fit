@@ -1,3 +1,4 @@
 --color
---warnings
+# OH GOD SO MANY CIRCULAR REQUIRES
+#--warnings
 --require spec_helper

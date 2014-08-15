@@ -1,6 +1,6 @@
 class OauthToken < ActiveRecord::Base
   belongs_to :user
 
-  validates :uid, :token, :secret, :provider, presence: true
-  validates :uid, :token, :secret, uniqueness: { scope: :provider }
+  validates :user, :uid, :token, :secret, :provider, presence: true
+  validates :user_id, :uid, :token, :secret, uniqueness: { scope: :provider }
 end
