@@ -8,4 +8,8 @@ class CalorieLog < ActiveRecord::Base
 
   validates :user, :calories, presence: true
   validates :calories, numericality: { only_integer: true }
+
+  def self.calorie_balance
+    sum(:calories)
+  end
 end
