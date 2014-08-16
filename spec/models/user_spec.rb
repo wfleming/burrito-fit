@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   it { should have_one(:oauth_token) }
   it { should have_many(:calorie_logs) }
+  it { should have_many(:burritos) }
 
   describe '#to_s' do
     before do
