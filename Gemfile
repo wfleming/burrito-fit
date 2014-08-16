@@ -46,6 +46,7 @@ end
 group :test do
   gem 'shoulda-matchers', require: false
   gem 'timecop', require: false
+  gem 'factory_girl_rails'
 end
 
 # Use unicorn as the app server

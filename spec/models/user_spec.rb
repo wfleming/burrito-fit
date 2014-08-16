@@ -46,4 +46,19 @@ RSpec.describe User, :type => :model do
       expect(@user.fitbit).to be(client)
     end
   end
+
+  describe '#fitbit_timezone' do
+    before do
+      @user = User.new(
+        oauth_token: OauthToken.new(
+          :extra_info => {'timezone' => 'America/New_York'}
+        )
+      )
+    end
+    subject { @user.fitbit_timezone }
+
+    it 'should have the correct offset' do
+      expect(subject.utc_offset).to eq(-18000)
+    end
+  end
 end

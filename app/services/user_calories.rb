@@ -9,7 +9,6 @@ class UserCalories
   # Get the user's calorie balance.
   # If no date is given, it is the user's all-time balance.
   # If date is passed, it is only the balance earned on that day.
-  # date should actually be a datetime, or timezones could make it wrong.
   def calorie_balance(date = nil)
     scope = user.calorie_logs
     if date

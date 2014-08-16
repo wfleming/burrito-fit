@@ -47,6 +47,11 @@ GEM
     envyable (0.0.2)
     erubis (2.7.0)
     execjs (2.2.1)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     fitgem (0.10.0)
       oauth
     foreman (0.74.0)
@@ -236,6 +241,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
   envyable
+  factory_girl_rails
   fitgem
   foreman
   jbuilder (~> 2.0)

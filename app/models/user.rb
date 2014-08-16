@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
       secret: oauth_token.secret
     )
   end
+
+  def fitbit_timezone
+    ActiveSupport::TimeZone[oauth_token.extra_info['timezone']]
+  end
 end
