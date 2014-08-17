@@ -5,7 +5,7 @@ class CreateFitbitSubscriptionWorker
     user = User.find(user_id)
     user.fitbit.create_subscription(
       type: :activities,
-      subscriptionId: user.id
+      subscription_id: user.id
     )
   end
 end
