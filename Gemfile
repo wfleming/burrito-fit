@@ -31,6 +31,7 @@ gem 'fitgem'
 gem 'rails_admin'
 gem 'sidekiq'
 gem 'sinatra', require: false # for sidekiq-web
+gem 'zero_push'
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
