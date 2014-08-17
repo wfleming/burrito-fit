@@ -1,6 +1,8 @@
 <% if logged_in? %>
   <p>Welcome <%= current_user %>!</p>
-  <p><%= button_to 'Log out', sessions_path, method: :delete %></p>
+  <p>
+    <%= button_to 'Log out', sessions_path, method: :delete, class: 'btn btn-danger' %>
+  </p>
 <% else %>
-  <%= link_to 'connect with fitbit', '/auth/fitbit' %>
+  <%= link_to 'connect with fitbit', '/auth/fitbit', class: 'btn btn-primary' %>
 <% end %>
