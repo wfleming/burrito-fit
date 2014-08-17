@@ -1,4 +1,10 @@
-<p>Finished sign up!</p>
+<div class="row center-block text-center">
+  <div style="height: 70px"></div>
+  <h1>You're signed in <%= current_user %>!</h1>
+  <p>
+    <%= link_to 'Go to your dashboard', app_dashboard_path, class: 'btn btn-primary' %>
+  </p>
+</div>
 
 <div style="display:none;" id="api-info">
   <%= ActiveSupport::JSON.encode({

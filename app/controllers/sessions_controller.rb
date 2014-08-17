@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
     end
 
     redirect_path = '/'
+    puts "session sign in path: #{session[:after_sign_in_path]}"
     if session[:after_sign_in_path]
       redirect_path = session[:after_sign_in_path]
       session.delete(:after_sign_in_path)
