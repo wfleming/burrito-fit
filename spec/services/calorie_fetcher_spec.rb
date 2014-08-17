@@ -20,13 +20,11 @@ RSpec.describe CalorieFetcher do
       fitbit_double = double(:fitbit)
       yesterday = date_in_user_timezone(Time.now - 1.day)
       today = date_in_user_timezone(Time.now)
-      puts "stub first: #{yesterday}"
-      puts "stub second: #{today}"
-      allow(fitbit_double).to receive(:activities_for_day)
+      allow(fitbit_double).to receive(:activities_on_date)
         .with(yesterday).and_return(
           {'summary' => {'activityCalories' => 200}}
         )
-      allow(fitbit_double).to receive(:activities_for_day)
+      allow(fitbit_double).to receive(:activities_on_date)
         .with(today).and_return(
           {'summary' => {'activityCalories' => 150}}
         )

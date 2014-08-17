@@ -4,6 +4,7 @@ RSpec.describe User, :type => :model do
   it { should have_one(:oauth_token) }
   it { should have_many(:calorie_logs) }
   it { should have_many(:burritos) }
+  it { should have_many(:ios_device_tokens) }
 
   describe '#to_s' do
     before do

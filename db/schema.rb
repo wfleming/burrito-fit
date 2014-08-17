@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816155132) do
+ActiveRecord::Schema.define(version: 20140817201807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20140816155132) do
 
   add_index "calorie_logs", ["user_id", "calories"], name: "index_calorie_logs_on_user_id_and_calories", using: :btree
   add_index "calorie_logs", ["user_id", "fitbit_date", "calories"], name: "index_calorie_logs_on_user_id_and_fitbit_date_and_calories", using: :btree
+
+  create_table "ios_device_tokens", force: true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "oauth_tokens", force: true do |t|
     t.integer  "user_id"

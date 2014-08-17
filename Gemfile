@@ -6,14 +6,10 @@ ruby '2.1.2'
 gem 'rails', '4.1.4'
 gem 'pg'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -26,6 +22,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Auth
 gem 'omniauth-fitbit'
+
+# use bootstrap & less
+# gem 'therubyracer',  platforms: :ruby
+# gem 'less-rails'
+# gem 'twitter-bootstrap-rails'
 
 gem 'fitgem'
 gem 'rails_admin'

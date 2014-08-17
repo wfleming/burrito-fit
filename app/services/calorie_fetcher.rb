@@ -8,7 +8,6 @@ class CalorieFetcher
 
   def fetch
     user_calories.dates_needing_data.each do |date|
-      puts "going to fetch for #{date}"
       fetch_for_day(date)
     end
   end
