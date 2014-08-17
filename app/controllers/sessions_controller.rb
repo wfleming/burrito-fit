@@ -31,7 +31,13 @@ class SessionsController < ApplicationController
       CreateFitbitSubscriptionWorker.perform_async(user.id)
     end
 
-    redirect_to '/'
+    redirect_path = '/'
+    if session[:after_sign_in_path]
+      redirect_path = session[:after_sign_in_path]
+      session.delete(:after_sign_in_path)
+    end
+
+    redirect_to redirect_path
   end
 
   # Called by OmniAuth when auth failed with a 'message' param

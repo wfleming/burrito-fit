@@ -1,0 +1,7 @@
+<p>Finished sign up!</p>
+
+<div style="display:none;" id="api-info">
+  <%= ActiveSupport::JSON.encode({
+    api_token: current_user.api_token
+  }).html_safe %>
+</div>
