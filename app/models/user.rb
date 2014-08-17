@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :burritos
   has_many :ios_device_tokens
 
+  ### Callbacks ###
+  before_save :ensure_api_token
+
   def to_s
     oauth_token.extra_info['name']
   end
@@ -20,5 +23,16 @@ class User < ActiveRecord::Base
 
   def fitbit_timezone
     ActiveSupport::TimeZone[oauth_token.extra_info['timezone']]
+  end
+
+  def ensure_api_token
+    (self.api_token = generate_api_token) if api_token.blank?
+  end
+
+  def generate_api_token
+    loop do
+      token = SecureRandom.urlsafe_base64(25).tr('b6d7a39fey', '689f4udac7')
+      break token unless User.where(:api_token => token).first
+    end
   end
 end
