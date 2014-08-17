@@ -19,7 +19,7 @@ class Webhooks::FitbitController < ApplicationController
   protected
 
   def verify_token
-    put "webhook request headers look like: #{headers.inspect}"
+    puts "webhook request headers look like: #{headers.inspect}"
     return
     provided_signature = headers['X-Fitbit-Signature']
     logger.debug('WEBHOOK header signature: ' + provided_signature)
