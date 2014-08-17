@@ -1,4 +1,5 @@
 class Api::V1::IosDeviceTokensController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   before_filter :log_in_if_api_token_present
 
   def create
