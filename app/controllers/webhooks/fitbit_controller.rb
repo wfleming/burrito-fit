@@ -19,9 +19,7 @@ class Webhooks::FitbitController < ApplicationController
   protected
 
   def verify_token
-    puts "webhook request headers look like: #{headers.inspect}"
-    return
-    provided_signature = headers['X-Fitbit-Signature']
+    provided_signature = request.headers['HTTP_X_FITBIT_SIGNATURE']
     logger.debug('WEBHOOK header signature: ' + provided_signature)
 
     message = request.body.read
@@ -35,5 +33,7 @@ class Webhooks::FitbitController < ApplicationController
 
     puts "calculated sig: #{calculated_signature}"
     (provided_signature == calculated_signature)
+  rescue => ex
+    logger.error("verify_token failed: #{ex}")
   end
 end
