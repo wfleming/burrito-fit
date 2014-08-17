@@ -23,10 +23,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Auth
 gem 'omniauth-fitbit'
 
-# use bootstrap & less
-# gem 'therubyracer',  platforms: :ruby
-# gem 'less-rails'
-# gem 'twitter-bootstrap-rails'
+# use bootstrap & sass
+gem 'sass-rails'
+gem 'bootstrap-sass'
 
 gem 'fitgem'
 gem 'rails_admin'
