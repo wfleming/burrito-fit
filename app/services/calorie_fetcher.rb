@@ -20,7 +20,7 @@ class CalorieFetcher
   end
 
   def fetch_for_day(day)
-    cals = user.fitbit.f.activities_on_date(day)['summary']['activityCalories']
+    cals = user.fitbit.activities_on_date(day)['summary']['activityCalories']
     # determine cals already recorded for this day
     already_cals = user_calories.calorie_balance(day)
     if already_cals < cals
