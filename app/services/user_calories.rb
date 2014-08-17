@@ -32,13 +32,13 @@ class UserCalories
     dates
   end
 
+  def today_in_user_tz
+    (Time.now.utc + user.fitbit_timezone.utc_offset.seconds).to_date
+  end
+
   # true if the user has enough calories for a burrito
   def burrito_earned?
     calorie_balance >= Burrito::CALORIES
-  end
-
-  def today_in_user_tz
-    (Time.now.utc + user.fitbit_timezone.utc_offset.seconds).to_date
   end
 
   # Creates a Burrito
