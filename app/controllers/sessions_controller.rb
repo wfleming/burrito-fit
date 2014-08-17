@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
         extra_info: auth_hash.info
       )
       log_in(user)
+      CalorieUpdateWorker.perform_async(user.id)
       CreateFitbitSubscriptionWorker.perform_async(user.id)
     end
 
