@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :ios_device_tokens, only: [:create]
+    end
+  end
+
   namespace :webhooks do
     post '/fitbit/subscription_update' => 'fitbit#subscription_update'
   end
