@@ -51,6 +51,13 @@ class UserCalories
           fitbit_date: today_in_user_tz
         )
       )
+      if user.ios_device_tokens.any?
+        ZeroPush.notify({
+          device_tokens: user.ios_device_tokens.map(&:token),
+          message: 'Burrito!',
+          sound: 'default'
+        })
+      end
     end
   end
 end
