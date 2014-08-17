@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
         extra_info: auth_hash.info
       )
       log_in(user)
+      CreateFitbitSubscriptionWorker.perform_async(user.id)
     end
 
     redirect_to '/'

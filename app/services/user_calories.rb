@@ -43,12 +43,14 @@ class UserCalories
 
   # Creates a Burrito
   def earn_burrito!
-    user.burritos.create!(
-      CalorieLog.create!(
-        user: user,
-        calories: (0 - Burrito::CALORIES),
-        fitbit_date: today_in_user_tz
+    Burrito.transaction do
+      user.burritos.create!(
+        CalorieLog.create!(
+          user: user,
+          calories: (0 - Burrito::CALORIES),
+          fitbit_date: today_in_user_tz
+        )
       )
-    )
+    end
   end
 end
