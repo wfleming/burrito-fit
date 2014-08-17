@@ -28,7 +28,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'omniauth-fitbit'
 
 gem 'fitgem'
+gem 'rails_admin'
 gem 'sidekiq'
+gem 'sinatra', require: false # for sidekiq-web
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
