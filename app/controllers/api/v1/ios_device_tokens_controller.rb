@@ -6,9 +6,9 @@ class Api::V1::IosDeviceTokensController < ApplicationController
     device_token = params[:token]
     if !current_user.ios_device_tokens.find_by_token(device_token)
       current_user.ios_device_tokens.create!(token: device_token)
-      render status: 201, nothing: true
+      render status: 201, json: {success: true}
     else
-      render status: 204, nothing: true
+      render status: 204, json: {success: true}
     end
   end
 
