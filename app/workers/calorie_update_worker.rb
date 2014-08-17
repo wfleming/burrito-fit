@@ -5,7 +5,7 @@ class CalorieUpdateWorker
     user = User.find(user_id)
     CalorieFetcher.new(user).fetch
     user_calories = UserCalories.new(user)
-    while user_calories.earned_burrito?
+    while user_calories.burrito_earned?
       user_calories.earn_burrito!
     end
   end
