@@ -1,14 +1,11 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  sequence(:token) {|n| "oauth-token-#{n}" }
-  sequence(:secret) {|n| "oauth-secret-#{n}" }
-  sequence(:uid) {|n| "uid-#{n}" }
   factory :oauth_token do
     provider 'fitbit'
-    token { FactoryGirl.next(:token) }
-    secret { FactoryGirl.next(:secret) }
-    uid { FactoryGirl.next(:uid) }
+    sequence(:token) {|n| "oauth-token-#{n}" }
+    sequence(:secret) {|n| "oauth-secret-#{n}" }
+    sequence(:uid) {|n| "uid-#{n}" }
     extra_info({
       "dob"=>"1985-03-14",
       "city"=>nil,

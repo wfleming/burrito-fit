@@ -3,7 +3,7 @@ require 'timecop'
 
 RSpec.describe UserCalories do
   before do
-    @user = User.new
+    @user = FactoryGirl.build_stubbed(:user)
   end
   subject { UserCalories.new(@user) }
 
@@ -13,22 +13,24 @@ RSpec.describe UserCalories do
     before do
       @now = Time.now
       Timecop.freeze (@now - 1.day) do
-        CalorieLog.create(user: @user, calories: 300)
+        CalorieLog.create(user: @user, calories: 300, fitbit_date: Date.today)
       end
       Timecop.freeze @now do
-        2.times { CalorieLog.create(user: @user, calories: 300) }
+        2.times do
+          CalorieLog.create(user: @user, calories: 300, fitbit_date: Date.today)
+        end
       end
     end
 
     it { expect(subject.calorie_balance).to eq(900) }
-    it { expect(subject.calorie_balance(@now)).to eq(600) }
+    it { expect(subject.calorie_balance(@now.to_date)).to eq(600) }
   end
 
   describe '#last_known_calorie_date' do
     context 'with no calorie data' do
       it do
         Timecop.freeze do
-          expect(subject.last_known_calorie_date).to eq(Time.now.utc.midnight)
+          expect(subject.last_known_calorie_date).to eq(Date.today)
         end
       end
     end
@@ -37,12 +39,12 @@ RSpec.describe UserCalories do
       before do
         @yesterday = (Time.now - 1.day)
         Timecop.freeze @yesterday do
-          CalorieLog.create(user: @user, calories: 300)
+          CalorieLog.create(user: @user, calories: 300, fitbit_date: Date.today)
         end
       end
 
       it do
-        expect(subject.last_known_calorie_date).to eq(@yesterday.utc.midnight)
+        expect(subject.last_known_calorie_date).to eq(@yesterday.to_date)
       end
     end
   end
@@ -51,28 +53,31 @@ RSpec.describe UserCalories do
     before { Timecop.freeze }
     after { Timecop.return }
     context 'with no calorie data' do
-      it { expect(subject.dates_needing_data).to eq([Time.now.utc.midnight]) }
+      it { expect(subject.dates_needing_data).to eq([Date.today]) }
     end
 
     context 'with calorie data for today' do
-      before { CalorieLog.create(user: @user, calories: 300) }
+      before { CalorieLog.create(user: @user, calories: 300, fitbit_date: Date.today) }
 
-      it { expect(subject.dates_needing_data).to eq([Time.now.utc.midnight]) }
+      it { expect(subject.dates_needing_data).to eq([Date.today]) }
     end
 
     context 'with calorie data for a few days ago' do
       before do
         CalorieLog.create(
-          user: @user, calories: 300, created_at: 3.days.ago.noon
+          user: @user,
+          calories: 300,
+          created_at: (Time.now - 3.days).noon,
+          fitbit_date: (Time.now - 3.days).to_date
         )
       end
 
       it do
         expected = [
-          3.days.ago.utc.midnight,
-          2.days.ago.utc.midnight,
-          1.days.ago.utc.midnight,
-          Time.now.utc.midnight,
+          (Time.now - 3.days).to_date,
+          (Time.now - 2.days).to_date,
+          (Time.now - 1.day).to_date,
+          Date.today,
         ]
         expect(subject.dates_needing_data).to eq(expected)
       end

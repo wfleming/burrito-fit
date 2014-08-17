@@ -11,26 +11,23 @@ class UserCalories
   # If date is passed, it is only the balance earned on that day.
   def calorie_balance(date = nil)
     scope = user.calorie_logs
-    if date
-      range = [(date.utc.midnight)...(date.tomorrow.utc.midnight)]
-      scope = scope.where(created_at: range)
-    end
+    (scope = scope.where(fitbit_date: date)) if date
     scope.calorie_balance
   end
 
   # last date we have calorie data for, or today if there is no calorie date
   def last_known_calorie_date
-    last_date = user.calorie_logs.maximum(:created_at)
-    (last_date || Time.now).utc.midnight
+    last_date = user.calorie_logs.maximum(:fitbit_date)
+    (last_date || today_in_user_tz)
   end
 
   # dates we should fetch data for
   def dates_needing_data
-    today = Time.now.utc.midnight
+    today = today_in_user_tz
     last_known = last_known_calorie_date
     dates = [last_known]
     while dates.last < today
-      dates << dates.last.tomorrow.midnight.utc
+      dates << dates.last.tomorrow
     end
     dates
   end
@@ -40,12 +37,17 @@ class UserCalories
     calorie_balance >= Burrito::CALORIES
   end
 
+  def today_in_user_tz
+    (Time.now.utc + user.fitbit_timezone.utc_offset.seconds).to_date
+  end
+
   # Creates a Burrito
   def earn_burrito!
     user.burritos.create!(
       CalorieLog.create!(
         user: user,
-        calories: (0 - Burrito::CALORIES)
+        calories: (0 - Burrito::CALORIES),
+        fitbit_date: today_in_user_tz
       )
     )
   end
