@@ -4,14 +4,14 @@ class Webhooks::FitbitController < ApplicationController
   def subscription_update
     begin
       verify_token # for now just want to see if we do it correctly
-      json = ActiveSupport::JSON.decode(body.request.read)
-      json.each do |sub_notification|
+      params['_json'].each do |sub_notification|
         # sub ids == user id
         sub_id = sub_notification['subscriptionId'].to_i
         CalorieUpdateWorker.perform_async(sub_id)
       end
     rescue => ex
-      logger.error(ex)
+      logger.error("FITBIT WEBHOOK FAILURE: #{ex}")
+      logger.error(ex.backtrace.join("\n"))
     end
     render status: 204, nothing: true
   end
@@ -19,6 +19,8 @@ class Webhooks::FitbitController < ApplicationController
   protected
 
   def verify_token
+    put "webhook request headers look like: #{headers.inspect}"
+    return
     provided_signature = headers['X-Fitbit-Signature']
     logger.debug('WEBHOOK header signature: ' + provided_signature)
 
