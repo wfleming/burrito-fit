@@ -28,6 +28,7 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 
 gem 'fitgem'
+gem 'hirefire-resource'
 gem 'rails_admin'
 gem 'sidekiq'
 gem 'sinatra', require: false # for sidekiq-web
