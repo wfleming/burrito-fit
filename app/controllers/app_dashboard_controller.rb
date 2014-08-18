@@ -13,7 +13,6 @@ class AppDashboardController < ApplicationController
 
   def begin_sign_in
     session[:after_sign_in_path] = finished_sign_in_app_dashboard_path
-    puts "session sign in path: #{session[:after_sign_in_path]}"
     redirect_to '/auth/fitbit'
   end
 

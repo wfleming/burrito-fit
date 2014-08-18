@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => :create
+
   # Called by OmniAuth when auth succeeded
   def create
     existing_token = OauthToken.where(
@@ -32,7 +34,6 @@ class SessionsController < ApplicationController
     end
 
     redirect_path = '/'
-    puts "session sign in path: #{session[:after_sign_in_path]}"
     if session[:after_sign_in_path]
       redirect_path = session[:after_sign_in_path]
       session.delete(:after_sign_in_path)
