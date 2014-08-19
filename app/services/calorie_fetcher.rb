@@ -21,7 +21,7 @@ class CalorieFetcher
   def fetch_for_day(day)
     cals = user.fitbit.activities_on_date(day)['summary']['activityCalories']
     # determine cals already recorded for this day
-    already_cals = user_calories.calorie_balance(day)
+    already_cals = user_calories.calorie_balance(day, true)
     if already_cals < cals
       CalorieLog.create!(
         user: user,

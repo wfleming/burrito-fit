@@ -9,10 +9,15 @@ class UserCalories
   # Get the user's calorie balance.
   # If no date is given, it is the user's all-time balance.
   # If date is passed, it is only the balance earned on that day.
-  def calorie_balance(date = nil)
+  def calorie_balance(date = nil, exclude_burritos = false)
     scope = user.calorie_logs
     (scope = scope.where(fitbit_date: date)) if date
-    scope.calorie_balance
+    if exclude_burritos
+      # TODO: change to track calorie log source. this is a hack!
+      scope.select { |c| c.burrito.nil? }.sum(&:calories)
+    else
+      scope.calorie_balance
+    end
   end
 
   # last date we have calorie data for, or today if there is no calorie date
