@@ -53,7 +53,7 @@ class UserCalories
     if user.ios_device_tokens.any?
       ZeroPush.notify({
         device_tokens: user.ios_device_tokens.map(&:token),
-        message: 'Burrito Time!',
+        alert: 'Burrito Time!',
         sound: 'default'
       })
     end
