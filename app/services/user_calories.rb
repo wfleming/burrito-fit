@@ -44,7 +44,7 @@ class UserCalories
   # Creates a Burrito
   def earn_burrito!
     user.burritos.create!(
-      CalorieLog.create!(
+      calorie_log: CalorieLog.create!(
         user: user,
         calories: (0 - Burrito::CALORIES),
         fitbit_date: today_in_user_tz
@@ -53,7 +53,7 @@ class UserCalories
     if user.ios_device_tokens.any?
       ZeroPush.notify({
         device_tokens: user.ios_device_tokens.map(&:token),
-        message: 'Burrito!',
+        message: 'Burrito Time!',
         sound: 'default'
       })
     end
