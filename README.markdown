@@ -1,6 +1,8 @@
 README
 ======
 
+Syncs with fitbit activity & calculates when you've burned enough calories to justify eating a burrito.
+
 Getting Started
 ---------------
 
